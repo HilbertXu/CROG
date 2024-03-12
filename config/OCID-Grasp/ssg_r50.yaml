@@ -1,0 +1,72 @@
+DATA:
+  dataset: OCID-Grasp
+  root_dir: /home/hilbertxu/PhD/second-year/projects/datasets/OCID-Grasp
+  train_split: train
+  val_split: val
+  img_size: 544
+  num_classes: 32
+  depth_factor: 1000
+  with_grasp_masks: True
+  with_ins_masks: True
+  with_sem_masks: True
+  with_depth: True
+  num_grasp_masks: 4
+  batch_size: 32  # batch size for training
+  batch_size_val: 2
+  workers: 16  # data loader workers
+  workers_val: 16
+
+
+MODEL:
+  # Basic network params
+  path_to_pretrained_resnet: exp/pretrain_resnet/backbone_res50.pth
+  backbone: "resnet"
+  resnet_layers: [3, 4, 6, 3]
+  fpn_in_channels: [512, 1024, 2048]
+  num_protos: 32
+  # Anchor params
+  anchor_strides: [8, 16, 32, 64, 128]
+  aspect_ratios: [1, 0.5, 2]
+  pos_iou_thre: 0.5
+  neg_iou_thre: 0.4
+
+TRAIN:
+  manual_seed: 3407
+  exp_name: "SSG-R50-OCID-Grasp"
+  output_folder: "exp/SSG-R50-OCID-Grasp"
+  base_lr: 0.0003
+  lr_decay: 0.95
+  momentum: 0.9
+  weight_decay: 0.0005
+  milestones: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+  start_epoch: 0
+  epochs: 5000
+  max_norm: 0.
+  sync_bn: True
+  alpha_conf: 1
+  alpha_bbox: 1.5
+  alpha_ins: 6.126
+  alpha_sem: 1
+  alpha_grasp: 6.125
+  masks_to_train: 100
+  tradition_nms: False
+  nms_score_thre: 0.05
+  nms_iou_thre: 0.5
+  top_k: 200
+  max_detections: 100
+  vis_protos: False
+  print_freq: 10
+  val_freq: 25
+  weight:  # path to initial weight (default: none)
+  resume:  exp/SSG-R50-OCID-Grasp/SSG-R50-OCID-Grasp/last_model.pth
+  evaluate: True
+  visualize: True
+  intermidiate_output: True
+
+Distributed:
+  dist_url: tcp://localhost:3681
+  dist_backend: 'nccl'
+  multiprocessing_distributed: True
+  world_size: 1
+  rank: 0
+  

@@ -1,0 +1,59 @@
+DATA:
+  dataset: OCID-VLG
+  root_path: /home/puzek/sdb/dataset/OCID-VLG
+  train_split: train
+  val_lmdb: datasets/lmdb/refcoco/val.lmdb
+  val_split: val
+  mask_root: datasets/masks/refcoco
+TRAIN:
+  # Base Arch
+  clip_pretrain: pretrain/RN50.pt
+  version: multiple
+  input_size: 416
+  word_len: 17
+  word_dim: 1024
+  vis_dim: 512
+  fpn_in: [512, 1024, 1024]
+  fpn_out: [256, 512, 1024]
+  sync_bn: True
+  # Decoder
+  num_layers: 3
+  num_head: 8
+  dim_ffn: 2048
+  dropout: 0.1
+  intermediate: False
+  # Training Setting
+  workers: 2  # data loader workers
+  workers_val: 2
+  epochs: 50
+  milestones: [35]
+  start_epoch: 0
+  batch_size: 24  # batch size for training
+  batch_size_val: 24  # batch size for validation during training, memory and speed tradeoff
+  base_lr: 0.0001
+  lr_decay: 0.1
+  lr_multi: 0.1
+  weight_decay: 0.
+  max_norm: 0.
+  manual_seed: 0
+  print_freq: 100
+  # Resume & Save
+  exp_name: CROG_multiple_R50_wo_grasps
+  output_folder: exp/OCID-VLG_multiple
+  save_freq: 1
+  weight:  # path to initial weight (default: none)
+  resume:  # exp/OCID-VLG_multiple/CROG_multiple_R50/best_jindex_model.pth
+  evaluate: True  # evaluate on validation set, extra gpu memory needed and small batch_size_val is recommend
+  # Ablation study
+  use_contrastive: True
+  use_pretrained_clip: True
+  use_grasp_masks: False
+Distributed:
+  dist_url: tcp://localhost:3681
+  dist_backend: 'nccl'
+  multiprocessing_distributed: True
+  world_size: 1
+  rank: 0
+TEST:
+  test_split: val-test
+  visualize: True
