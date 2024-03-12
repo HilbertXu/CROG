@@ -31,7 +31,12 @@ Robots operating in human-centric environments require the integration of visual
 This implementation only supports **multi-gpu**, **DistributedDataParallel** training, which is faster and simpler; single-gpu or DataParallel training is not supported. Besides, the evaluation only supports single-gpu mode. In our case, we train the CROG on 2 RTX-4090 GPUs. The training procedure takes around 3.5 hours. To do training of CROG with 2 GPUs, run:
 
 ```
-python -u train.py --config config/OCID-VLG/CROG_multiple_r50.yaml
+python -u train_crog.py --config config/OCID-VLG/CROG_multiple_r50.yaml
+```
+
+To do training of SSG with 2 GPUs, run:
+```
+python -u train_ssg.py --config config/OCID-Grasp/ssg_r50.yaml
 ```
 
 **Please remember to modify the path to the dataset in config files.**
