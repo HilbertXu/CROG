@@ -55,4 +55,15 @@ If you find our work useful in your research, please consider citing:
   booktitle={7th Annual Conference on Robot Learning},
   year={2023}
 }
+
+@inproceedings{10161149,
+  author={Xu, Yucheng and Kasaei, Mohammadreza and Kasaei, Hamidreza and Li, Zhibin},
+  booktitle={2023 IEEE International Conference on Robotics and Automation (ICRA)}, 
+  title={Instance-wise Grasp Synthesis for Robotic Grasping}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1744-1750},
+  keywords={Automation;Object detection;Grasping;Benchmark testing;Feature extraction;Cleaning;Task analysis},
+  doi={10.1109/ICRA48891.2023.10161149}}
 ```
