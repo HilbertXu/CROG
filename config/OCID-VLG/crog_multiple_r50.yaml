@@ -1,6 +1,6 @@
 DATA:
   dataset: OCID-VLG
-  root_path: /home/hilbertxu/PhD/second-year/projects/datasets/OCID-VLG
+  root_path: ./datasets/OCID-VLG
   train_split: train
   val_split: val
 TRAIN:
@@ -40,7 +40,7 @@ TRAIN:
   output_folder: exp/OCID-VLG_multiple
   save_freq: 1
   weight:  # path to initial weight (default: none)
-  resume:  # exp/OCID-VLG_multiple/CROG_multiple_R50/best_jindex_model.pth
+  resume:  weights/best_jindex_model.pth
   evaluate: True  # evaluate on validation set, extra gpu memory needed and small batch_size_val is recommend
   # Ablation study
   use_contrastive: True

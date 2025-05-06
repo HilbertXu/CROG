@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import torch
 import torch.nn.functional as F
 
-from cython_nms import nms as cnms
 from .box_utils import crop, box_iou
 
 

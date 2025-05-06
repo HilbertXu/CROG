@@ -9,8 +9,8 @@ import torch.utils.data
 from loguru import logger
 
 import utils.config as config
-from engine.engine import inference_with_grasp
-from model import build_segmenter
+from engine.crog_engine import inference_with_grasp
+from model import build_crog
 from utils.dataset import OCIDVLGDataset
 from utils.misc import setup_logger
 
@@ -66,7 +66,7 @@ def main():
                                               collate_fn=OCIDVLGDataset.collate_fn)
 
     # build model
-    model, _ = build_segmenter(args)
+    model, _ = build_crog(args)
     model = torch.nn.DataParallel(model).cuda()
     logger.info(model)
     
